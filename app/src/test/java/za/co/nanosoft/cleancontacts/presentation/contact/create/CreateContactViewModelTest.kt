@@ -13,7 +13,7 @@ import za.co.nanosoft.cleancontacts.domain.models.ContactRequestModel
 
 class CreateContactViewModelTest {
     @Test
-    fun test_CreateContactViewModel() = runBlocking {
+    fun test_CreateContactViewModel_Should_Return_True() = runBlocking {
         val mockUseCase = mock<CreateContactUseCase>()
         whenever(mockUseCase.execute(any())).thenReturn(true)
         val vm = CreateContactViewModel(mockUseCase)
@@ -23,7 +23,7 @@ class CreateContactViewModelTest {
     }
 
     @Test
-    fun test_CreateContactViewModelWhenUseCaseThrowsError() = runBlocking {
+    fun test_CreateContactViewModel_Should_Set_Error_When_UseCase_Throws() = runBlocking {
         val mockUseCase = mock<CreateContactUseCase>()
         whenever(mockUseCase.execute(any())).thenThrow()
         val vm = CreateContactViewModel(mockUseCase)
