@@ -13,46 +13,51 @@ import za.co.nanosoft.cleancontacts.domain.models.ContactRequestModel
 class EditContactViewModelTest {
 
     @Test
-    fun test_DeleteContact_Should_Return_True() = runBlocking {
+    fun deleteContact_should_return_true() = runBlocking {
         val mockDeleteUseCase = mock<DeleteContactUseCase>()
         val mockUpdateUseCase = mock<UpdateContactUseCase>()
         whenever(mockDeleteUseCase.execute(any())).thenReturn(true)
         val vm = EditContactViewModel(mockDeleteUseCase, mockUpdateUseCase)
-        val result = vm.deleteContact("123")
+        val result = vm.deleteContact(1)
         assertEquals(result, true)
+        assertEquals(vm.isBusy, false)
         assertEquals(vm.errorMessage, "")
     }
 
     @Test
-    fun test_DeleteContact_Should_Set_Error_Message_When_UseCase_Throws() = runBlocking {
+    fun should_set_error_when_deleteContact_fails() = runBlocking {
         val mockDeleteUseCase = mock<DeleteContactUseCase>()
         val mockUpdateUseCase = mock<UpdateContactUseCase>()
         whenever(mockDeleteUseCase.execute(any())).thenThrow()
         val vm = EditContactViewModel(mockDeleteUseCase, mockUpdateUseCase)
-        val result = vm.deleteContact("12345")
+        val result = vm.deleteContact(1)
         assertEquals(result, false)
+        assertEquals(vm.isBusy, false)
         assertEquals(vm.errorMessage, "Error Deleting Contact")
     }
 
     @Test
-    fun test_UpdateContact_Should_Return_True() = runBlocking {
+    fun updateContact_should_return_true() = runBlocking {
         val mockDeleteUseCase = mock<DeleteContactUseCase>()
         val mockUpdateUseCase = mock<UpdateContactUseCase>()
         whenever(mockUpdateUseCase.execute(any(), any())).thenReturn(true)
         val vm = EditContactViewModel(mockDeleteUseCase, mockUpdateUseCase)
-        val result = vm.updateContact("123", ContactRequestModel(name = "Paul"))
+
+        val result = vm.updateContact(1, ContactRequestModel(name = "Paul"))
         assertEquals(result, true)
+        assertEquals(vm.isBusy, false)
         assertEquals(vm.errorMessage, "")
     }
 
     @Test
-    fun test_UpdateContact_Should_Set_Error_Message_When_UseCase_Throws() = runBlocking {
+    fun should_set_error_when_updateContact_fails() = runBlocking {
         val mockDeleteUseCase = mock<DeleteContactUseCase>()
         val mockUpdateUseCase = mock<UpdateContactUseCase>()
         whenever(mockUpdateUseCase.execute(any(), any())).thenThrow()
         val vm = EditContactViewModel(mockDeleteUseCase, mockUpdateUseCase)
-        val result = vm.updateContact("12345", ContactRequestModel(name = "Paul"))
+        val result = vm.updateContact(1, ContactRequestModel(name = "Paul"))
         assertEquals(result, false)
+        assertEquals(vm.isBusy, false)
         assertEquals(vm.errorMessage, "Error Updating Contact")
 
     }

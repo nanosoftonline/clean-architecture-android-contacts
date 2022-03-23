@@ -10,7 +10,7 @@ import za.co.nanosoft.cleancontacts.domain.models.ContactResponseModel
 
 class ListContactsViewModelTest {
     @Test
-    fun test_ListContactsViewModel_Should_Set_List_Data() = runBlocking {
+    fun should_set_contacts_with_data() = runBlocking {
         val mockUseCase = mock<GetAllContactsUseCase>()
         val expectedResult = listOf(
             ContactResponseModel(id = 1, name = "Paul"),
@@ -24,7 +24,7 @@ class ListContactsViewModelTest {
     }
 
     @Test
-    fun test_ListContactsViewModel_Should_Set_Error_When_UseCase_Throws() = runBlocking {
+    fun should_set_error_when_getContacts_fails() = runBlocking {
         val mockUseCase = mock<GetAllContactsUseCase>()
         whenever(mockUseCase.execute()).thenThrow()
         val vm = ListContactsViewModel(mockUseCase)
