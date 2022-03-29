@@ -12,10 +12,8 @@ class CreateContactViewModelTest {
     @Test
     fun createContact_should_return_true() = runBlocking {
         val mockUseCase = mock<CreateContactUseCase>()
-        whenever(mockUseCase.execute(any())).thenReturn(true)
         val vm = CreateContactViewModel(mockUseCase)
         val result = vm.createContact(ContactRequestModel(name = "Paul"))
-        assertEquals(result, true)
         verify(mockUseCase, times(1)).execute(any())
         assertEquals(vm.errorMessage, "")
     }
@@ -26,7 +24,6 @@ class CreateContactViewModelTest {
         whenever(mockUseCase.execute(any())).thenThrow()
         val vm = CreateContactViewModel(mockUseCase)
         val result = vm.createContact(ContactRequestModel(name = "Paul"))
-        assertEquals(result, false)
         assertEquals(vm.errorMessage, "Error Creating Contact")
     }
 }

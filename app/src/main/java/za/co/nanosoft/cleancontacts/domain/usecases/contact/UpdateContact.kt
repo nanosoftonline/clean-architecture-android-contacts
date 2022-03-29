@@ -9,7 +9,7 @@ import za.co.nanosoft.cleancontacts.domain.models.ContactResponseModel
 
 class UpdateContact constructor(private val contactRepository: ContactRepository) :
     UpdateContactUseCase {
-    override suspend fun execute(id: Int, data: ContactRequestModel): Boolean {
+    override suspend fun execute(id: Int, data: ContactRequestModel) {
         return contactRepository.updateContact(id, data)
     }
 }

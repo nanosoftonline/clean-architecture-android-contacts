@@ -21,25 +21,23 @@ class EditContactViewModel constructor(
     val isBusy: Boolean
         get() = _isBusy.value
 
-    suspend fun deleteContact(id: Int): Boolean {
-        return try {
+    suspend fun deleteContact(id: Int) {
+        try {
             _isBusy.value = true
             deleteContactUseCase.execute(id)
         } catch (err: Exception) {
             _errorMessage.value = "Error Deleting Contact"
-            false
         } finally {
             _isBusy.value = false
         }
     }
 
-    suspend fun updateContact(id: Int, data: ContactRequestModel): Boolean {
-        return try {
+    suspend fun updateContact(id: Int, data: ContactRequestModel) {
+        try {
             _isBusy.value = true
             updateContactUseCase.execute(id, data)
         } catch (err: Exception) {
             _errorMessage.value = "Error Updating Contact"
-            false
         } finally {
             _isBusy.value = false
         }

@@ -13,12 +13,11 @@ class CreateContactViewModel constructor(private val createContactUseCase: Creat
     val errorMessage: String
         get() = _errorMessage.value
 
-    suspend fun createContact(data: ContactRequestModel): Boolean {
-        return try {
+    suspend fun createContact(data: ContactRequestModel) {
+        try {
             createContactUseCase.execute(data)
         } catch (err: Exception) {
             _errorMessage.value = "Error Creating Contact"
-            false
         }
     }
 }

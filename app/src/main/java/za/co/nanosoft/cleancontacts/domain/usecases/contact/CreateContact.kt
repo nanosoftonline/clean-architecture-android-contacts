@@ -6,7 +6,7 @@ import za.co.nanosoft.cleancontacts.domain.models.ContactRequestModel
 
 class CreateContact constructor(private val contactRepository: ContactRepository) :
     CreateContactUseCase {
-    override suspend fun execute(contact: ContactRequestModel): Boolean {
+    override suspend fun execute(contact: ContactRequestModel) {
         return contactRepository.createContact(contact)
     }
 }

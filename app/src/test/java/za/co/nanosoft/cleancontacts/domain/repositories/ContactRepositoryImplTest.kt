@@ -48,30 +48,24 @@ class ContactRepositoryImplTest {
     @Test
     fun deleteContact_should_return_true() = runBlocking {
         val mockContactDataSource = mock<ContactDataSource>()
-        whenever(mockContactDataSource.delete(any())).thenReturn(true)
         val repo = ContactRepositoryImpl(mockContactDataSource)
         val result = repo.deleteContact(1)
         verify(mockContactDataSource, times(1)).delete(any())
-        assertEquals(result, true)
     }
 
     @Test
     fun updateContact_should_return_true() = runBlocking {
         val mockContactDataSource = mock<ContactDataSource>()
-        whenever(mockContactDataSource.update(any(), any())).thenReturn(true)
         val repo = ContactRepositoryImpl(mockContactDataSource)
         val result = repo.updateContact(1, ContactRequestModel(name = "Paul"))
         verify(mockContactDataSource, times(1)).update(any(), any())
-        assertEquals(result, true)
     }
 
     @Test
     fun createContact_should_return_true() = runBlocking {
         val mockContactDataSource = mock<ContactDataSource>()
-        whenever(mockContactDataSource.create(any())).thenReturn(true)
         val repo = ContactRepositoryImpl(mockContactDataSource)
         val result = repo.createContact(ContactRequestModel(name = "Paul"))
         verify(mockContactDataSource, times(1)).create(any())
-        assertEquals(result, true)
     }
 }

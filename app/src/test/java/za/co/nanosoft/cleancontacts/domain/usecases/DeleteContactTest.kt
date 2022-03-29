@@ -13,10 +13,8 @@ class DeleteContactTest {
     @Test
     fun should_return_true() = runBlocking {
         val mockContactRepo = mock<ContactRepository>()
-        whenever(mockContactRepo.deleteContact(any())).thenReturn(true)
         val useCase = DeleteContact(mockContactRepo)
         val result = useCase.execute(1)
         verify(mockContactRepo, times(1)).deleteContact(any())
-        Assert.assertEquals(result, true)
     }
 }

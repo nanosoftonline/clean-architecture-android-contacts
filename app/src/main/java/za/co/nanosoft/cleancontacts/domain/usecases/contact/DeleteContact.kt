@@ -5,7 +5,7 @@ import za.co.nanosoft.cleancontacts.domain.interfaces.usecases.DeleteContactUseC
 
 class DeleteContact constructor(private val contactRepository: ContactRepository) :
     DeleteContactUseCase {
-    override suspend fun execute(id: Int): Boolean {
+    override suspend fun execute(id: Int) {
         return contactRepository.deleteContact(id)
     }
 }

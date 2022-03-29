@@ -16,10 +16,8 @@ class EditContactViewModelTest {
     fun deleteContact_should_return_true() = runBlocking {
         val mockDeleteUseCase = mock<DeleteContactUseCase>()
         val mockUpdateUseCase = mock<UpdateContactUseCase>()
-        whenever(mockDeleteUseCase.execute(any())).thenReturn(true)
         val vm = EditContactViewModel(mockDeleteUseCase, mockUpdateUseCase)
         val result = vm.deleteContact(1)
-        assertEquals(result, true)
         assertEquals(vm.isBusy, false)
         assertEquals(vm.errorMessage, "")
     }
@@ -31,7 +29,6 @@ class EditContactViewModelTest {
         whenever(mockDeleteUseCase.execute(any())).thenThrow()
         val vm = EditContactViewModel(mockDeleteUseCase, mockUpdateUseCase)
         val result = vm.deleteContact(1)
-        assertEquals(result, false)
         assertEquals(vm.isBusy, false)
         assertEquals(vm.errorMessage, "Error Deleting Contact")
     }
@@ -40,11 +37,9 @@ class EditContactViewModelTest {
     fun updateContact_should_return_true() = runBlocking {
         val mockDeleteUseCase = mock<DeleteContactUseCase>()
         val mockUpdateUseCase = mock<UpdateContactUseCase>()
-        whenever(mockUpdateUseCase.execute(any(), any())).thenReturn(true)
         val vm = EditContactViewModel(mockDeleteUseCase, mockUpdateUseCase)
 
         val result = vm.updateContact(1, ContactRequestModel(name = "Paul"))
-        assertEquals(result, true)
         assertEquals(vm.isBusy, false)
         assertEquals(vm.errorMessage, "")
     }
@@ -56,7 +51,6 @@ class EditContactViewModelTest {
         whenever(mockUpdateUseCase.execute(any(), any())).thenThrow()
         val vm = EditContactViewModel(mockDeleteUseCase, mockUpdateUseCase)
         val result = vm.updateContact(1, ContactRequestModel(name = "Paul"))
-        assertEquals(result, false)
         assertEquals(vm.isBusy, false)
         assertEquals(vm.errorMessage, "Error Updating Contact")
 

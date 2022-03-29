@@ -6,7 +6,7 @@ import za.co.nanosoft.cleancontacts.domain.models.ContactResponseModel
 
 class GetOneContact constructor(private val contactRepository: ContactRepository) :
     GetContactUseCase {
-    override suspend fun execute(id: Int): ContactResponseModel {
+    override suspend fun execute(id: Int): ContactResponseModel? {
         return contactRepository.getContact(id)
     }
 }

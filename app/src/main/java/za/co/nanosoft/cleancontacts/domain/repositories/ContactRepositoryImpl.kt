@@ -11,19 +11,19 @@ class ContactRepositoryImpl constructor(private val contactDataSource: ContactDa
         return contactDataSource.getAll()
     }
 
-    override suspend fun getContact(id: Int): ContactResponseModel {
+    override suspend fun getContact(id: Int): ContactResponseModel? {
         return contactDataSource.getOne(id)
     }
 
-    override suspend fun deleteContact(id: Int): Boolean {
+    override suspend fun deleteContact(id: Int) {
         return contactDataSource.delete(id)
     }
 
-    override suspend fun updateContact(id: Int, data: ContactRequestModel): Boolean {
+    override suspend fun updateContact(id: Int, data: ContactRequestModel) {
         return contactDataSource.update(id, data)
     }
 
-    override suspend fun createContact(data: ContactRequestModel): Boolean {
+    override suspend fun createContact(data: ContactRequestModel) {
         return contactDataSource.create(data)
     }
 }

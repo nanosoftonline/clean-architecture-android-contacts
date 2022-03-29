@@ -13,10 +13,8 @@ class CreateContactTest {
     @Test
     fun should_return_true() = runBlocking {
         val mockContactRepo = mock<ContactRepository>()
-        whenever(mockContactRepo.createContact(any())).thenReturn(true)
         val useCase = CreateContact(mockContactRepo)
         val result = useCase.execute(ContactRequestModel(name = "Paul"))
         verify(mockContactRepo, times(1)).createContact(any())
-        assertEquals(result, true)
     }
 }
