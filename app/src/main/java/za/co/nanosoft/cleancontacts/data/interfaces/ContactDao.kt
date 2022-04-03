@@ -1,5 +1,6 @@
 package za.co.nanosoft.cleancontacts.data.interfaces
 
+import android.content.Context
 import androidx.room.*
 import za.co.nanosoft.cleancontacts.data.datasources.room.entities.ContactRoomEntity
 
@@ -9,7 +10,7 @@ abstract class ContactDatabase : RoomDatabase() {
     abstract val contactDao: ContactDao
 
     companion object {
-        const val DATABASE_NAME = "contacts_db"
+        const val DATABASE_NAME = "contact_db"
     }
 }
 
