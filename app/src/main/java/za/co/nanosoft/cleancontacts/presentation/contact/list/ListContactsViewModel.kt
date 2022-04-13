@@ -35,7 +35,7 @@ class ListContactsViewModel @Inject constructor(
 
 
     val contacts: List<ContactListResponseModel>
-        get() = _contacts
+        get() = _contacts.toList()
 
     suspend fun getContacts() {
         try {

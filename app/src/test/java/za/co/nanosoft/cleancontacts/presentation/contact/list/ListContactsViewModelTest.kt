@@ -19,7 +19,13 @@ class ListContactsViewModelTest {
         whenever(mockUseCase.execute()).thenReturn(expectedResult)
         val vm = ListContactsViewModel(mockUseCase)
         vm.getContacts()
-        assertEquals(vm.contacts, expectedResult)
+        assertEquals(
+            vm.contacts,
+            listOf(
+                ContactListResponseModel(id = "1", name = "Paul"),
+                ContactListResponseModel(id = "2", name = "John")
+            )
+        )
         assertEquals(vm.errorMessage, "")
     }
 
