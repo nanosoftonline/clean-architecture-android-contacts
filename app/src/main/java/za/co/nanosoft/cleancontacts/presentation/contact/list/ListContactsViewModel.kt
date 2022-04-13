@@ -9,26 +9,39 @@ import za.co.nanosoft.cleancontacts.domain.models.ContactResponseModel
 import java.lang.Exception
 import javax.inject.Inject
 
+data class ContactListResponseModel(
+    val id: String,
+    val name: String,
+)
+
+fun ContactResponseModel.toContactListResponseModel(): ContactListResponseModel {
+    return ContactListResponseModel(
+        id = id.toString(),
+        name = name,
+    )
+}
+
+
 @HiltViewModel
 class ListContactsViewModel @Inject constructor(
     private val getAllContactsUseCase: GetAllContactsUseCase
 ) :
     ViewModel() {
     private val _errorMessage = mutableStateOf("")
-    private val _contacts = mutableStateListOf<ContactResponseModel>()
+    private val _contacts = mutableStateListOf<ContactListResponseModel>()
 
     val errorMessage: String
         get() = _errorMessage.value
 
 
-    val contacts: List<ContactResponseModel>
-        get() = _contacts.toList()
+    val contacts: List<ContactListResponseModel>
+        get() = _contacts
 
     suspend fun getContacts() {
         try {
             _contacts.clear()
             val list = getAllContactsUseCase.execute()
-            _contacts.addAll(list)
+            _contacts.addAll(list.map { it.toContactListResponseModel() })
         } catch (err: Exception) {
             _errorMessage.value = "Error Fetching Contacts"
         }

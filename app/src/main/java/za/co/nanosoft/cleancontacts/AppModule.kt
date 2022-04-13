@@ -2,6 +2,9 @@ package za.co.nanosoft.cleancontacts
 
 import android.app.Application
 import android.content.Context
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import androidx.room.Room
 import dagger.Module
 import dagger.Provides
@@ -12,24 +15,18 @@ import za.co.nanosoft.cleancontacts.data.datasources.room.RoomContactDataSource
 import za.co.nanosoft.cleancontacts.data.interfaces.ContactDataSource
 import za.co.nanosoft.cleancontacts.data.interfaces.ContactDatabase
 import za.co.nanosoft.cleancontacts.domain.interfaces.ContactRepository
+import za.co.nanosoft.cleancontacts.domain.interfaces.usecases.CreateContactUseCase
 import za.co.nanosoft.cleancontacts.domain.interfaces.usecases.GetAllContactsUseCase
 import za.co.nanosoft.cleancontacts.domain.repositories.ContactRepositoryImpl
+import za.co.nanosoft.cleancontacts.domain.usecases.contact.CreateContact
 import za.co.nanosoft.cleancontacts.domain.usecases.contact.GetContacts
+import za.co.nanosoft.cleancontacts.presentation.contact.list.ListContactsViewModel
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
-//    @Provides
-//    @Singleton
-//    fun provideDatabase(app: Application): ContactDatabase {
-//        return Room.databaseBuilder(
-//            app,
-//            ContactDatabase::class.java,
-//            ContactDatabase.DATABASE_NAME
-//        ).build()
-//    }
 
     @Provides
     @Singleton
@@ -55,5 +52,10 @@ object AppModule {
         return GetContacts(contactRepository = repository)
     }
 
+    @Provides
+    @Singleton
+    fun providesCreateContactUseCase(repository: ContactRepository): CreateContactUseCase {
+        return CreateContact(contactRepository = repository)
+    }
 
 }

@@ -4,12 +4,13 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import za.co.nanosoft.cleancontacts.domain.models.ContactRequestModel
 import za.co.nanosoft.cleancontacts.domain.models.ContactResponseModel
+import java.sql.Date
 
 @Entity(tableName = "tb_contact")
 data class ContactRoomEntity(
     @PrimaryKey
     val id: Int? = null,
-    val name: String
+    val name: String,
 )
 
 
@@ -24,6 +25,6 @@ fun ContactRoomEntity.toContactResponseModel(): ContactResponseModel {
 fun ContactRequestModel.toContactRoomEntity(): ContactRoomEntity {
     return ContactRoomEntity(
         id = id,
-        name = name,
+        name = name
     )
 }
